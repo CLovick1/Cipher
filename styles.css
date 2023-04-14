@@ -1,0 +1,80 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+  background-color: #ADD8E6;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  	display: grid;
+  	justify-content: center;
+  	align-content: center;
+	margin: 20px auto;
+	max-width: 1500px;
+}
+
+#button {
+	display: flex;
+  	justify-content: center;
+  	align-content: center;
+	margin: 20px auto;
+	max-width: 250px;
+}
+
+.form {
+  background-color: #FFD700;
+  border: 10px solid #D4AF37;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #D4AF37;
+}
+
+h1 {
+  text-align: center;
+  color: #D4AF37;
+  text-shadow: 1px 1px 1px #8B6914;
+}
+
+label {
+  font-size: 20px;
+  color: #8B6914;
+  text-shadow: 1px 1px 1px #FFF8DC;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  padding: 5px;
+  border: 2px solid #8B6914;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: #8B6914;
+  color: #FFF8DC;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #D4AF37;
+}
+
+#encrypted-message {
+  font-size: 16px;
+  padding: 5px;
+  border: 2px solid #8B6914;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+

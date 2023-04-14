@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decryption</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+            <h1>Decryption</h1>
+            <label for="keyword">Keyword (one word, no spaces): </label>
+            <input type="text" id="keyword"><br>
+            <label for="encrypted-message">Encrypted Message: </label>
+            <textarea id="encrypted-message" rows="10" cols="50" maxlength="1000"></textarea><br>
+            <button onclick="decrypt()">Decrypt</button><br>
+            <label for="message">Decrypted Message: </label>
+            <textarea id="message" rows="10" cols="50" readonly maxlength="1000"></textarea>
+        </div>
+    <a href ="Encrypter.html"><button id="button">ENCRYPTION</button></a>
+    <script>
+        function letterToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
+            let result = [];
+            for (let letter of s) {
+                let index = alphabet.indexOf(letter.toLowerCase());
+                result.push(index);
+            }
+            return result;
+        }
+
+        function decrypt() {
+            let keyword = document.getElementById("keyword").value;
+            let encryptedMessage = document.getElementById("encrypted-message").value;
+            let keywordNum = letterToNumber(keyword.repeat(encryptedMessage.replace(/ /g, "").length));
+            let encryptedNum = letterToNumber(encryptedMessage.replace(/ /g, ""));
+            let result = "";
+            for (let i = 0; i < encryptedNum.length; i++) {
+                let decryptedNum = (encryptedNum[i] - keywordNum[i] + 26) % 26;
+                let decryptedLetter = String.fromCharCode(decryptedNum + 97);
+                result += decryptedLetter;
+            }
+            document.getElementById("message").value = result;
+        }
+    </script>
+</body>
+</html>

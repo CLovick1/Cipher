@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encryption</title>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div class="container">
+    <h1>Encryption</h1>
+    <label for="keyword">Keyword (one word, no spaces): </label>
+    <input type="text" id="keyword"><br>
+    <label for="message">Message: </label>
+    <textarea id="message" rows="10" cols="50" maxlength="1000"></textarea><br>
+    <button onclick="encrypt()">Encrypt</button><br>
+    <label for="encrypted-message">Encrypted Message: </label>
+    <textarea id="encrypted-message" rows="10" cols="50" readonly maxlength="1000"></textarea>
+    </div>
+    <a href ="Decrypter.html"><button id="button">DECRYPTION</button></a>
+    <script>
+        function letterToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
+            let result = [];
+            for (let letter of s) {
+                let index = alphabet.indexOf(letter.toLowerCase());
+                result.push(index);
+            }
+            return result;
+        }
+
+        function messageToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
+            let result = [];
+            for (let letter of s) {
+                if (letter === " ") {
+                    continue;  // Skip spaces
+                }
+                let index = alphabet.indexOf(letter.toLowerCase());
+                result.push(index);
+            }
+            return result;
+        }
+
+        function encrypt() {
+            let keyword = document.getElementById("keyword").value;
+            let message = document.getElementById("message").value;
+
+            // Repeat the keyword to match the length of the message
+            keyword = keyword.repeat(message.replace(/ /g, "").length);
+
+            let keywordNum = letterToNumber(keyword);
+            let messageNum = messageToNumber(message);
+
+            let result = [];
+            for (let i = 0; i < messageNum.length; i++) {
+                let encryptedNum = (keywordNum[i] + messageNum[i]) % 26;
+                let encryptedLetter = String.fromCharCode(encryptedNum + 97);
+                if (message[i] === message[i].toUpperCase()) {
+                    encryptedLetter = encryptedLetter.toUpperCase();
+                }
+                result.push(encryptedLetter);
+            }
+
+            let encryptedMessage = result.join("");
+            document.getElementById("encrypted-message").value = encryptedMessage;
+        }
+    </script>
+</body>
+</html>
+
