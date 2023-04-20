@@ -6,11 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<header>
-	<div class="container"></div>
+	<div class="container">
     <h1>Encryption</h1>
-	</header>
-	<main>
     <label for="keyword">Keyword (one word, no spaces): </label>
     <input type="text" id="keyword"><br>
     <label for="message">Message: </label>
@@ -18,10 +15,8 @@
     <button onclick="encrypt()">Encrypt</button><br>
     <label for="encrypted-message">Encrypted Message: </label>
     <textarea id="encrypted-message" rows="10" cols="50" readonly maxlength="1000"></textarea>
-	</main>
-	<footer>
     <a href ="Decrypter.html"><button id="button">DECRYPTION</button></a>
-	</footer>
+	</div>
     <script>
         function letterToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
             let result = [];
