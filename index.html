@@ -18,51 +18,68 @@
     <a href ="Decrypter.html"><button id="button">DECRYPTION</button></a>
 	</div>
     <script>
-        function letterToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
-            let result = [];
-            for (let letter of s) {
+    function letterToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
+        let result = [];
+        for (let letter of s) {
+            if (letter === " ") {
+                result.push(-1);  // Use -1 to represent spaces
+            } else {
                 let index = alphabet.indexOf(letter.toLowerCase());
                 result.push(index);
             }
-            return result;
         }
+        return result;
+    }
 
-        function messageToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
-            let result = [];
-            for (let letter of s) {
-                if (letter === " ") {
-                    continue;  // Skip spaces
-                }
+    function messageToNumber(s, alphabet="abcdefghijklmnopqrstuvwxyz") {
+        let result = [];
+        for (let letter of s) {
+            if (letter === " ") {
+                result.push(-1);  // Use -1 to represent spaces
+            } else {
                 let index = alphabet.indexOf(letter.toLowerCase());
                 result.push(index);
             }
-            return result;
         }
+        return result;
+    }
 
-     function encrypt() {
-            let keyword = document.getElementById("keyword").value;
-            let message = document.getElementById("message").value;
+    function encrypt() {
+        let keyword = document.getElementById("keyword").value;
+        let message = document.getElementById("message").value;
 
-            // Repeat the keyword to match the length of the message
-            keyword = keyword.repeat(message.replace(/ /g, "").length);
+        // Repeat the keyword to match the length of the message
+        keyword = keyword.repeat(message.replace(/ /g, "").length);
 
-            let keywordNum = letterToNumber(keyword);
-            let messageNum = messageToNumber(message);
+        let keywordNum = letterToNumber(keyword);
+        let messageNum = messageToNumber(message);
 
-            let result = [];
-            for (let i = 0; i < messageNum.length; i++) {
-                let encryptedNum = (keywordNum[i] + messageNum[i]) % 26;
-                let encryptedLetter = String.fromCharCode(encryptedNum + 97);
+        let result = [];
+        for (let i = 0; i < messageNum.length; i++) {
+            let encryptedNum;
+            if (messageNum[i] === -1) {
+                encryptedNum = -1;  // Preserve spaces in the encrypted message
+            } else {
+                encryptedNum = (keywordNum[i] + messageNum[i]) % 26;
+            }
+
+            let encryptedLetter;
+            if (encryptedNum === -1) {
+                encryptedLetter = " ";  // Insert spaces in the encrypted message
+            } else {
+                encryptedLetter = String.fromCharCode(encryptedNum + 97);
                 if (message[i] === message[i].toUpperCase()) {
                     encryptedLetter = encryptedLetter.toUpperCase();
                 }
-                result.push(encryptedLetter);
             }
-
-            let encryptedMessage = result.join("");
-            document.getElementById("encrypted-message").value = encryptedMessage;
+            result.push(encryptedLetter);
         }
-    </script>
+
+        let encryptedMessage = result.join("");
+        document.getElementById("encrypted-message").value = encryptedMessage;
+    }
+</script>
+
 </body>
 </html>
 
